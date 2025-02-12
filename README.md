@@ -1,17 +1,6 @@
-Jay Thakur - jsthakur
-Harsh Mauny - hrmauny
-Rohan Kausik Nandula - rnandul
-Shafa Hassan - shassa22
 
-# DBMS 540 zybook clone - README.TXT
 
-## NOTE
-We have tried creating a procedure in VCL but had the following issue:
-
-"ERROR: 1728 (HY000): Cannot load from mysql.proc. The table is probably corrupted"
-
-Hence we used 'aivencloud' instance of MariaDB. The connection details are in db.py file of the application.
-
+# Learning Management System Clone (Full Stack Flask App with Database Design)
 
 ## Run Locally
 
