@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Content</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <h1>Enrolled E-books</h1>
+
+    {% for course in enrolled_courses %}
+        <h2>{{ loop.index }}. {{ course.textbook_title }}</h2> 
+
+        {% for chapter in course.chapters %}
+            <h3 style="margin-left: 20px;">
+                {{ loop.index }}. {{ chapter.chapter_title }}
+            </h3> 
+
+            {% for section in chapter.sections %}
+                <h4 style="margin-left: 40px;">
+                    {{ loop.index }}. {{ section.section_title }}
+                </h4>
+
+                {% for block in section.content_blocks %}
+                    <p style="margin-left: 60px;">
+                        {% if block.type == 'Image'%}
+                        {{ loop.index }}. <img src="{{ block.content }}" alt="Image Content" style="max-width: 10%;">
+                        {% else %}
+                            {{ loop.index }}. {{ block.content }}
+                        {% endif %}
+                       
+                    </p>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+
+    <h2>Please select an option:</h2>
+    <ul>
+      <li><a href="{{ url_for('section') }}">View a section</a></li>
+      <li><a href="{{ url_for('participation_point') }}">View participation activity point</a></li>
+      <li><a href="{{ url_for('view_notification') }}">Notifications</a></li>
+      <li><a href="{{ url_for('home') }}">Logout</a></li>
+    </ul>
+
+
+</body>
+</html>

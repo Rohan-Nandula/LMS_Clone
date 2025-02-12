@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h1 {
+            text-align: center;
+        }
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!-- Display flash messages -->
+    <div class="flash">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+          {% if messages %}
+            <ul>
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+
+    <h1>Enrolled Students</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if students %}
+                {% for student in students %}
+                <tr>
+                    <td>{{ student.userid }}</td>  <!-- u.userid -->
+                    <td>{{ student.firstName }}</td>  <!-- u.firstName -->
+                    <td>{{ student.lastName }}</td>  <!-- u.lastName -->
+                    <td>{{ student.email }}</td>  <!-- u.lastName -->
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center;">No students enrolled in this course.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <div class="back-button">
+        {% if session.role == 'TA' %}
+            <a href="{{ url_for('ta.active_course_menu') }}">Go Back</a>
+        {% else %}
+            <a href="{{ url_for('active_course_menu') }}">Go Back</a>
+        {% endif %}
+    </div>
+
+</body>
+</html>

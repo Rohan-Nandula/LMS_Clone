@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Content</title>
+</head>
+<body>
+    <h1>Content for Section</h1>
+
+    
+    {% if content_to_display.type == 'Text' %}
+        <div class="text-block">
+            <p>{{ content_to_display.content }}</p>
+        </div>
+    {% elif content_to_display.type == 'Image' %}
+        <div class="image-block">
+            <img src="{{ content_to_display.content }}" alt="Image Content">
+        </div>
+    {% endif %}
+   
+    <br>
+    <form action="{{ url_for('view_next_block') }}">
+        <button type="submit">Next/Submit</button>
+    </form>
+    <br>
+    <form action="{{ url_for('section') }}">
+        <button type="submit">Go Back</button>
+    </form>
+</body>
+</html>

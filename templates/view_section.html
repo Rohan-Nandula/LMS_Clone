@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Block</title>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+
+    <h2>Please enter the details</h2>
+    <form action="{{ url_for('view_block') }}" method="post">
+
+      <label for="chapterId">Course ID:</label><br>
+      <input type="text" id="courseId" name="courseId" required><br><br>
+
+      <label for="chapterId">Chapter ID:</label><br>
+      <input type="text" id="chapterId" name="chapterId" required><br><br>
+      
+      <label for="sectionId">Section ID:</label><br>
+      <input type="text" id="sectionId" name="sectionId" required><br><br>
+      <button type="submit">View Block</button>
+  </form>
+
+  <br>
+  <!-- Button to go back to home -->
+  <form action="{{ url_for('student_landing') }}">
+      <button type="submit">Go Back</button>
+  </form>
+  </body>
+</html>

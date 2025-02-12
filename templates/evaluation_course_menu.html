@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EValuation Course Menu</title>
+</head>
+<body>
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <h1>Course ID: {{ course_id }}</h1>
+    <ul>
+        <li><a href="{{ url_for('fac_TA_add_chapter') }}">1. Add New Chapter</a></li>
+        <li><a href="{{ url_for('fac_TA_modify_chapter') }}">2. Modify Chapters</a></li>
+        <li><a href="{{ url_for('faculty_dashboard') }}">3. Go Back</a></li>
+    </ul>
+</body>
+</html>

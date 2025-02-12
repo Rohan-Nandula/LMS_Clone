@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query Execution Screen</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select a Query to Execute</h1>
+    <form method="POST">
+        <button type="submit" name="query_number" value="1">1. Number of sections in first chapter of textbook</button><br>
+        <button type="submit" name="query_number" value="2">2. Faculty and TAs for all courses</button><br>
+        <button type="submit" name="query_number" value="3">3. Active course details</button><br>
+        <button type="submit" name="query_number" value="4">4. Course with largest waiting list</button><br>
+        <button type="submit" name="query_number" value="5">5. Contents of Chapter 02 of textbook 101</button><br>
+        <button type="submit" name="query_number" value="6">6. Incorrect answers for Q2 of Activity0</button><br>
+        <button type="submit" name="query_number" value="7">7. Book active for one instructor, evaluation for another</button><br>
+    </form>
+
+    <hr>
+
+    <li><a href="{{ url_for('home') }}">Back to Home</a></li>
+
+    {% if query_result %}
+        <h2>Query Result:</h2>
+        {% if query_result is iterable and query_result[0] is mapping %}
+            <!-- Display a list of dictionaries as a table with multiple rows -->
+            <table>
+                <tr>
+                    {% for key in query_result[0].keys() %}
+                        <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in query_result %}
+                    <tr>
+                        {% for value in row.values() %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% elif query_result is mapping %}
+            <!-- Display a single dictionary as a table with one row -->
+            <table>
+                <tr>
+                    {% for key in query_result.keys() %}
+                        <th>{{ key }}</th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for value in query_result.values() %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% else %}
+            <pre>{{ query_result }}</pre>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

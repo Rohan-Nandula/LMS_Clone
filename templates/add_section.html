@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Add New Section</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        margin-top: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input[type="text"] {
+        width: 400px;
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ul li {
+        margin-bottom: 10px;
+      }
+      ul li a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      ul li a:hover {
+        text-decoration: underline;
+      }
+      .flash-success {
+        color: green;
+      }
+      .flash-error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="flash-{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <h1>Course ID: {{ session['course_id'] }}</h1>
+    <h2>Chapter No: {{ chapter_number }}</h2>
+    <h1>Add New Section</h1>
+
+    <form method="POST">
+      <label for="section_number">Unique Section Number (Format: SecXX):</label>
+      <input type="text" name="section_number" required /><br /><br />
+
+      <label for="section_title">Section Title:</label>
+      <input type="text" name="section_title" required /><br /><br />
+
+      
+      <button type="submit" name="choice" value="1">
+        Add New Content Block</button
+      ><br /><br />
+    </form>
+    <ol>
+    <li><a href="{{ url_for('add_chapter', textbook_id=textbook_id) }}">Go Back</a></li>
+    <li>
+      <a
+        href="{{ url_for('ta.ta_dashboard' if role == 'TA' else 'faculty_dashboard' if role == 'Faculty' else 'admin_dashboard') }}"
+        >Landing Page</a
+      >
+    </li>
+    </ol>
+    </form>
+    <br />
+    <!-- <form
+      action="{{ url_for('ta.ta_dashboard' if role == 'TA' else 'faculty_dashboard' if role == 'Faculty' else 'admin_dashboard') }}"
+    >
+      <button type="submit">2. Go Back</button>
+    </form> -->
+  </body>
+</html>

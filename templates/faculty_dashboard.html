@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Faculty Dashboard</title>
+</head>
+<body>
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+      {% if messages %}
+        <ul>
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <h1>Welcome, {{ session['name'] }}</h1>
+    <ol>
+        <li><a href="{{ url_for('active_course') }}">Go to Active Course</a></li>
+        <li><a href="{{ url_for('evaluation_course') }}">Go to Evaluation Course</a></li>
+        <li><a href="{{ url_for('view_courses') }}">View Courses</a></li>
+        <li><a href="{{ url_for('change_password') }}">Change Password</a></li>
+        <li><a href="{{ url_for('exit_app') }}">Logout</a></li>
+    </ol>
+</body>
+</html>

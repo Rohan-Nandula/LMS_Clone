@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Notification</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <h1>Your UnRead Notifications</h1>
+
+    {% if notifications %}
+        <form action="/view_notification" method="POST">
+            <p>Select a Notification to Mark as Read:</p>
+            {% for notification in notifications %}
+                <div>
+                    <input type="radio" id="notification_{{ notification.id }}" name="notification_id" value="{{ notification.id }}" required>
+                    <label for="notification_{{ notification.id }}">
+                        {{ notification.message }}
+                    </label>
+                </div>
+            {% endfor %}
+            <button type="submit">Mark as Read</button>
+        </form>
+    {% else %}
+        <p>You have no unread notifications available.</p>
+    {% endif %}
+    <br>
+    <form action="{{ url_for('student_landing') }}">
+        <button type="submit">Go to landing page</button>
+    </form>
+
+</body>
+</html>

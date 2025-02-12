@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hide Activity</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        margin-top: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ul li {
+        margin-bottom: 10px;
+      }
+      ul li a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      ul li a:hover {
+        text-decoration: underline;
+      }
+      .success {
+        color: green;
+      }
+      .error {
+        color: red;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 50px;
+      }
+      form {
+        max-width: 400px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: column;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Display flash messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <h1>Hide Activity: {{ activity_id }}</h1>
+
+    <form method="POST">
+      <label for="activity_id">Enter Activity ID:</label>
+      <input type="text" id="activity_id" name="activity_id" required />
+
+      <button type="submit" name="save">Hide</button>
+      <button type="submit" name="cancel">Cancel</button>
+    </form>
+  </body>
+</html>

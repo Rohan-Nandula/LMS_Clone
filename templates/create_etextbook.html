@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create E-textbook</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <h1>Admin: Create E-textbook</h1>
+    
+    <form method="POST">
+        <label for="title">Title of the new E-textbook:</label>
+        <input type="text" name="title" required><br><br>
+
+        <label for="etextbook_id">Unique E-textbook ID:</label>
+        <input type="number" name="etextbook_id" required><br><br>
+
+        <h2>Menu</h2>
+        <button type="submit" name="choice" value="1">1. Add New Chapter</button><br><br>
+    </form>
+    <form action="{{ url_for('admin_dashboard') }}">
+        <button type="submit">2. Go Back</button>
+    </form>
+</body>
+</html>

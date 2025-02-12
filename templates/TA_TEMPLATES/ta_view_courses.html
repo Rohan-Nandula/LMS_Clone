@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TA Dashboard</title>
+    <style>
+      .flash-success {
+        color: green;
+      }
+      .flash-error {
+        color: red;
+      }
+      .flash-warning {
+        color: orange;
+      }
+      .flash-info {
+        color: blue;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      ul,
+      ol {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin: 5px 0;
+      }
+      a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="flash-{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <h1>TA: {{ session['name'] }}</h1>
+
+    <h2>Courses:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Course Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in courses %}
+        <tr>
+          <td>{{ course.title }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h2>Menu:</h2>
+    <ol>
+      <li><a href="{{ url_for('ta.ta_dashboard') }}">Go Back</a></li>
+    </ol>
+  </body>
+</html>

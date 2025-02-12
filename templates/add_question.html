@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Question</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 20px;
+        }
+        h1 {
+          color: #333;
+        }
+        form {
+          margin-top: 20px;
+        }
+        label {
+          display: block;
+          margin-bottom: 5px;
+        }
+        input[type="text"],input[type="number"], textarea, select {
+          width: 400px;
+          padding: 8px;
+          margin-bottom: 20px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        button {
+          padding: 10px 20px;
+          background-color: #28a745;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #218838;
+        }
+        ul {
+          list-style-type: none;
+          padding: 0;
+        }
+        ul li {
+          margin-bottom: 10px;
+        }
+        ul li a {
+          color: #007bff;
+          text-decoration: none;
+        }
+        ul li a:hover {
+          text-decoration: underline;
+        }
+        .flash-success {
+          color: green;
+        }
+        .flash-error {
+          color: red;
+        }
+      </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+        <ul>
+          {% for category, message in messages %}
+          <li class="flash-{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+    <h1>Add Question to Activity {{ activity_id }}</h1>
+
+    <form method="POST">
+        <!-- Question details -->
+        <label for="question_id">Question ID:</label>
+        <input type="number" name="question_id" required><br><br>
+
+        <label for="question_text">Question Text:</label>
+        <textarea name="question_text" required></textarea><br><br>
+
+        <!-- Option 1 -->
+        <h3>Option 1:</h3>
+        <label for="option1_text">Text:</label>
+        <input type="text" name="option1_text" required><br><br>
+        
+        <label for="option1_explanation">Explanation:</label>
+        <textarea name="option1_explanation" required></textarea><br><br>
+
+        <label for="option1_label">Label (Correct/Incorrect):</label>
+        <select name="option1_label" required>
+            <option value="Correct">Correct</option>
+            <option value="Incorrect">Incorrect</option>
+        </select><br><br>
+
+        <!-- Option 2 -->
+        <h3>Option 2:</h3>
+        <label for="option2_text">Text:</label>
+        <input type="text" name="option2_text" required><br><br>
+
+        <label for="option2_explanation">Explanation:</label>
+        <textarea name="option2_explanation" required></textarea><br><br>
+
+        <label for="option2_label">Label (Correct/Incorrect):</label>
+        <select name="option2_label" required>
+            <option value="Correct">Correct</option>
+            <option value="Incorrect">Incorrect</option>
+        </select><br><br>
+
+        <!-- Option 3 -->
+        <h3>Option 3:</h3>
+        <label for="option3_text">Text:</label>
+        <input type="text" name="option3_text" required><br><br>
+
+        <label for="option3_explanation">Explanation:</label>
+        <textarea name="option3_explanation" required></textarea><br><br>
+
+        <label for="option3_label">Label (Correct/Incorrect):</label>
+        <select name="option3_label" required>
+            <option value="Correct">Correct</option>
+            <option value="Incorrect">Incorrect</option>
+        </select><br><br>
+
+        <!-- Option 4 -->
+        <h3>Option 4:</h3>
+        <label for="option4_text">Text:</label>
+        <input type="text" name="option4_text" required><br><br>
+
+        <label for="option4_explanation">Explanation:</label>
+        <textarea name="option4_explanation" required></textarea><br><br>
+
+        <label for="option4_label">Label (Correct/Incorrect):</label>
+        <select name="option4_label" required>
+            <option value="Correct">Correct</option>
+            <option value="Incorrect">Incorrect</option>
+        </select><br><br>
+
+        <h2>Menu</h2>
+        <button type="submit" name="choice" value="1">1. Save</button><br><br>
+        <!-- <button type="submit" name="choice" value="2">2. Cancel</button><br><br>
+        <button type="submit" name="choice" value="3">3. Landing Page</button> -->
+    </form>
+    <form action="{{ url_for('add_activity', content_block_id=content_block_id, section_number=section_number, chapter_number=chapter_number, textbook_id=textbook_id) }}">
+        <button type="submit">2. Cancel</button>
+    </form>
+    <br>
+    <form action="{{ url_for('admin_dashboard') }}">
+        <button type="submit">3. Landing Page</button>
+    </form>
+</body>
+</html>

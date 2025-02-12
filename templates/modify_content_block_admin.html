@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Content Block</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <h1>Admin: Modify Content Block</h1>
+    
+    <form method="POST">
+        <label for="content_block_id">Content Block ID:</label>
+        <input type="int" name="content_block_id" required><br><br>
+
+        <h2>Menu</h2>
+        <button type="submit" name="choice" value="1">1. Add Text</button><br><br>
+        <button type="submit" name="choice" value="2">2. Add Picture</button><br><br>
+        <button type="submit" name="choice" value="3">3. Add New Activity</button><br><br>
+    </form>
+    <form action="{{ url_for('modify_section_admin', textbook_id=textbook_id, chapter_number=chapter_number) }}">
+        <button type="submit">4. Go Back</button>
+    </form>
+    <br>
+    <form action="{{ url_for('admin_dashboard') }}">
+        <button type="submit">5. Landing Page</button>
+    </form>
+</body>
+</html>

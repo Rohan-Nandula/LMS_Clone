@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ role }} Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        margin-top: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input[type="text"],
+      input[type="password"] {
+        width: 400px;
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ul li {
+        margin-bottom: 10px;
+      }
+      ul li a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      ul li a:hover {
+        text-decoration: underline;
+      }
+      .flash-success {
+        color: green;
+      }
+      .flash-error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="flash-{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <h1>{{ role }} Login</h1>
+    <form method="POST">
+      <label for="userid">User ID:</label>
+      <input type="text" name="userid" required /><br /><br />
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" required /><br /><br />
+
+      <button type="submit">Login</button>
+    </form>
+    <br />
+    <!-- Button to go back to home -->
+    <form action="{{ url_for('home') }}">
+      <button type="submit">Go Back</button>
+    </form>
+  </body>
+</html>

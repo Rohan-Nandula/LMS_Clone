@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Active Course Menu</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        margin-top: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input[type="text"] {
+        width: 400px;
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      ol,
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ol li,
+      ul li {
+        margin-bottom: 10px;
+      }
+      ul li a,
+      ol li a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      ul li a:hover,
+      ol li a:hover {
+        text-decoration: underline;
+      }
+      .flash-success {
+        color: green;
+      }
+      .flash-error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="flash-{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <h1>Course ID: {{ course_id }}</h1>
+    <ol>
+      {% if session['role'] == 'TA' %}
+      <li><a href="{{ url_for('ta.TA_add_chapter') }}">Add New Chapter</a></li>
+      <li><a href="{{ url_for('ta.view_students') }}">View Students</a></li>
+      <li>
+        <a href="{{ url_for('ta.TA_modify_chapter') }}">Modify Chapters</a>
+      </li>
+      <li><a href="{{ url_for('ta.ta_dashboard') }}">Go Back</a></li>
+      {% else %}
+      <li><a href="{{ url_for('view_worklist') }}">View Worklist</a></li>
+      <li>
+        <a href="{{ url_for('approve_enrollment') }}">Approve Enrollment</a>
+      </li>
+      <li><a href="{{ url_for('view_students') }}">View Students</a></li>
+      <li><a href="{{ url_for('fac_TA_add_chapter') }}">Add New Chapter</a></li>
+      <li>
+        <a href="{{ url_for('fac_TA_modify_chapter') }}">Modify Chapters</a>
+      </li>
+      <li><a href="{{ url_for('view_courses') }}">View Courses</a></li>
+      <li><a href="{{ url_for('add_ta') }}">Add TA</a></li>
+      <li><a href="{{ url_for('faculty_dashboard') }}">Go Back</a></li>
+      {% endif %}
+    </ol>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Activity</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      form {
+        margin-top: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input[type="text"] {
+        width: 400px;
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      ul li {
+        margin-bottom: 10px;
+      }
+      ul li a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      ul li a:hover {
+        text-decoration: underline;
+      }
+      .flash-success {
+        color: green;
+      }
+      .flash-error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="flash-{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <h1>Add Activity</h1>
+
+    <form method="POST">
+      <label for="activity_id">Unique Activity ID:</label>
+      <input type="text" name="activity_id" required /><br /><br />
+
+      <h2>Menu</h2>
+      <button type="submit" name="choice" value="1">1. Add Question</button
+      ><br /><br />
+    </form>
+    <form
+      action="{{ url_for('add_content_block', section_number=section_number, chapter_number=chapter_number, textbook_id=textbook_id) }}"
+    >
+      <button type="submit">2. Go Back</button>
+    </form>
+    <br />
+    <form action="{{ url_for('admin_dashboard') }}">
+      <button type="submit">3. Landing Page</button>
+    </form>
+  </body>
+</html>

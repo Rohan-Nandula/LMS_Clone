@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Content</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Course Title</th>
+                <th>Total Participation Points Earned</th>
+                <th> Total points</th>
+                <th>Number of Finished Activities</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if result %}
+                {% for row in result %}
+                    <tr>
+                        <td>{{ row.studentID }}</td>
+                        <td>{{ row.course_id }}</td>
+                        <td>{{ row.total_points_earned }}</td>
+                        <td>{{ row.total_points }}</td>
+                        <td>{{ row.num_of_finished_activities }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">No participation activity performed. Points Earnned: 0</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <br>
+  <!-- Button to go back to home -->
+  <form action="{{ url_for('student_landing') }}">
+      <button type="submit">Go Back</button>
+  </form>
+</body>
+</html>

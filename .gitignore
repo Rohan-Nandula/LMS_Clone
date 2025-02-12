@@ -1,0 +1,7 @@
+env
+appenv
+__pycache__
+config.py
+db.py
+.DS_Store
+.idea/
